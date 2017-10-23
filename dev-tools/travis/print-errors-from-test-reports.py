@@ -18,17 +18,21 @@ import glob
 import traceback
 from xml.etree.ElementTree import ElementTree
 
-def print_detail_information(testcase, file_path):
+
+def print_detail_information(file_path, failure_cases):
     print "-" * 50
-    print "classname: %s / testname: %s" % (testcase.get("classname"), testcase.get("name"))
+    for testcase in failure_cases:
+        print "classname: %s / testname: %s" % (testcase.get("classname"), testcase.get("name"))
+    print "-" * 50
+    print "Printing output..."
     output_file_path = file_path.replace("TEST-", "").replace(".xml", "-output.txt")
     if os.path.exists(output_file_path):
-        print "-" * 50
         with open(output_file_path, "r") as fr:
             print fr.read()
-        print "-" * 50
     else:
         print "No output file for the test case. desired output file path: %s" % output_file_path
+
+    print "-" * 50
 
 
 def print_error_reports_from_report_file(file_path):
@@ -44,13 +48,17 @@ def print_error_reports_from_report_file(file_path):
         return
 
     testcases = tree.findall(".//testcase")
+    failure_cases = []
     for testcase in testcases:
         error = testcase.find("error")
         fail = testcase.find("fail")
         failure = testcase.find("failure")
 
         if error is not None or fail is not None or failure is not None:
-            print_detail_information(testcase, file_path)
+            failure_cases.append(testcase)
+
+    if len(failure_cases) > 0:
+        print_detail_information(file_path, failure_cases)
 
 
 def main(report_dir_path):
