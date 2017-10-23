@@ -48,6 +48,7 @@ import com.hortonworks.registries.schemaregistry.state.SchemaVersionLifecycleSta
 import org.apache.avro.util.Utf8;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -177,9 +178,10 @@ public class AvroSchemaRegistryClientTest {
                                                     BAD_REQUEST, BAD_REQUEST_PARAM_MISSING)
             };
 
+    @Ignore
     @Test
     public void testFail() {
-        // FIXME: after delete
+        // FIXME: DEBUG after delete
         fail("Intentionally failing!");
     }
 
