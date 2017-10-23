@@ -28,6 +28,7 @@ import com.hortonworks.registries.storage.search.WhereClause;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,12 +86,14 @@ public class SearchApiTest {
                 "(  \"description\" LIKE '% data%' OR \"amount\" > ?  )  ) OR (  \"description\" LIKE '%bar%' AND \"count\" > ?  )  ORDER BY \"name\" ASC ";
     }
 
+    @Ignore
     @Test
     public void testFailFast() {
         // FIXME: DEBUG! SHOULD BE REMOVED!
         Assert.fail("Should be removed!");
     }
 
+    @Ignore
     @Test
     public void testFailFast2() {
         // FIXME: DEBUG! SHOULD BE REMOVED!

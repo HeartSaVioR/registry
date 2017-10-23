@@ -28,6 +28,7 @@ import org.h2.tools.RunScript;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -60,12 +61,14 @@ public class DbFileStorageTest {
         runScript("drop_fileblob.sql");
     }
 
+    @Ignore
     @Test
     public void testFailFast() {
         // FIXME: DEBUG! SHOULD BE REMOVED!
         Assert.fail("Should be removed!");
     }
 
+    @Ignore
     @Test
     public void testFailFast2() {
         // FIXME: DEBUG! SHOULD BE REMOVED!
