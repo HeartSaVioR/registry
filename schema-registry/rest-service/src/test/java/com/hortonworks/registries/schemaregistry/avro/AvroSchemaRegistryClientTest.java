@@ -77,6 +77,7 @@ import static com.hortonworks.registries.common.catalog.CatalogResponse.Response
 import static com.hortonworks.registries.common.catalog.CatalogResponse.ResponseMessage.UNSUPPORTED_SCHEMA_TYPE;
 import static com.hortonworks.registries.schemaregistry.serdes.avro.AvroSnapshotSerializer.SERDES_PROTOCOL_VERSION;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static org.junit.Assert.fail;
 
 @RunWith(CustomParameterizedRunner.class)
 @Category(IntegrationTest.class)
@@ -177,6 +178,12 @@ public class AvroSchemaRegistryClientTest {
             };
 
     @Test
+    public void testFail() {
+        // FIXME: after delete
+        fail("Intentionally failing!");
+    }
+
+    @Test
     public void testSchemaCreateFailures() throws Exception {
         // Run through all the tests related to schema create failure scenarios
         for (SchemaCreateFailureScenario scenario : createFailureScenarios) {
@@ -196,7 +203,7 @@ public class AvroSchemaRegistryClientTest {
 
         try {
             SCHEMA_REGISTRY_CLIENT.addSchemaVersion(schemaName, new SchemaVersion(AvroSchemaRegistryClientUtil.getSchema("/schema-4.avsc"), "Forth version of the schema, adds back name field, but different type"));
-            Assert.fail("Should throw IncompatibleSchemaException as check against all schema's would find name field is not compatible with v1 and v2");
+            fail("Should throw IncompatibleSchemaException as check against all schema's would find name field is not compatible with v1 and v2");
         } catch (IncompatibleSchemaException ise) {
             //expected
         }
@@ -213,7 +220,7 @@ public class AvroSchemaRegistryClientTest {
         try {
             SCHEMA_REGISTRY_CLIENT.addSchemaVersion(schemaName, new SchemaVersion(AvroSchemaRegistryClientUtil.getSchema("/schema-4.avsc"), "Forth version of the schema, adds back name field, but different type"));
         } catch (IncompatibleSchemaException ise) {
-            Assert.fail("Should not throw IncompatibleSchemaException as check against only latest schema as such should ignore v1 and v2");
+            fail("Should not throw IncompatibleSchemaException as check against only latest schema as such should ignore v1 and v2");
         }
     }
 
@@ -501,7 +508,7 @@ public class AvroSchemaRegistryClientTest {
         // enable version 4
         try {
             SCHEMA_REGISTRY_CLIENT.enableSchemaVersion(schemaIdVersion_4.getSchemaVersionId());
-            Assert.fail("Enabling " + schemaIdVersion_4 + " should have failed with incompatible schema error");
+            fail("Enabling " + schemaIdVersion_4 + " should have failed with incompatible schema error");
         } catch (IncompatibleSchemaException e) {
         }
         Assert.assertEquals(SchemaVersionLifecycleStates.INITIATED.getId(),
@@ -539,7 +546,7 @@ public class AvroSchemaRegistryClientTest {
         HashSet<T> statesSet = new HashSet<>();
         for (T state : states) {
             if (!statesSet.add(state)) {
-                Assert.fail("stateMachineInfo contains duplicate state: " + state);
+                fail("stateMachineInfo contains duplicate state: " + state);
             }
         }
     }
