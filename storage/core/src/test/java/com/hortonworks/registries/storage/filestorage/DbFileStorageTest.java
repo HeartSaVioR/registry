@@ -61,6 +61,18 @@ public class DbFileStorageTest {
     }
 
     @Test
+    public void testFailFast() {
+        // FIXME: DEBUG! SHOULD BE REMOVED!
+        Assert.fail("Should be removed!");
+    }
+
+    @Test
+    public void testFailFast2() {
+        // FIXME: DEBUG! SHOULD BE REMOVED!
+        Assert.fail("Should be removed!");
+    }
+
+    @Test
     public void testUploadDownload() throws Exception {
         String input = IOUtils.toString(this.getClass().getClassLoader().getResourceAsStream(FILE_NAME), "UTF-8");
         dbFileStorage.upload(IOUtils.toInputStream(input, "UTF-8"), FILE_NAME);

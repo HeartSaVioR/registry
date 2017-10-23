@@ -86,6 +86,18 @@ public class SearchApiTest {
     }
 
     @Test
+    public void testFailFast() {
+        // FIXME: DEBUG! SHOULD BE REMOVED!
+        Assert.fail("Should be removed!");
+    }
+
+    @Test
+    public void testFailFast2() {
+        // FIXME: DEBUG! SHOULD BE REMOVED!
+        Assert.fail("Should be removed!");
+    }
+
+    @Test
     public void testSearchAPIJsons() throws Exception {
         LOG.info("simpleQuery = [{}]", simpleQuery);
         LOG.info("complexQuery = [{}]", complexQuery);
