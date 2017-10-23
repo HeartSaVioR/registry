@@ -22,10 +22,13 @@ def print_detail_information(testcase, file_path):
     print "-" * 50
     print "classname: %s / testname: %s" % (testcase.get("classname"), testcase.get("name"))
     output_file_path = file_path.replace("TEST-", "").replace(".xml", "-output.txt")
-    print "-" * 50
-    with open(output_file_path, "r") as fr:
-        print fr.read()
-    print "-" * 50
+    if os.path.exists(output_file_path):
+        print "-" * 50
+        with open(output_file_path, "r") as fr:
+            print fr.read()
+        print "-" * 50
+    else:
+        print "No output file for the test case. desired output file path: %s" % output_file_path
 
 
 def print_error_reports_from_report_file(file_path):
@@ -48,11 +51,6 @@ def print_error_reports_from_report_file(file_path):
 
         if error is not None or fail is not None or failure is not None:
             print_detail_information(testcase, file_path)
-            print "-" * 50
-            print "Printing output: " % output_file_path
-            with open(output_file_path, "r") as fr:
-                print fr.read()
-            print "-" * 50
 
 
 def main(report_dir_path):
